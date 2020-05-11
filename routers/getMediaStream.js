@@ -55,7 +55,6 @@ module.exports = (server) => {
             } catch (err) {
                 return 'Oops, something went wrong';
             }
-
         }
     });
 }

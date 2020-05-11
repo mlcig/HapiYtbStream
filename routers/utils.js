@@ -1,15 +1,16 @@
 const rangeParse = (range, size) => {
-    if(!range){
-        return {start:0}
+    let result = {}, start, end
+    if (range) {
+        if (typeof (range) !== 'string') {
+            throw new Error('RANGE SHOULD BE A STRING')
+        } else {
+            let arr = range.split(/bytes=([0-9]*)-([0-9]*)/)
+            start = parseInt(arr[1]);
+            end = parseInt(arr[2]);
+        }
     }
-    if(typeof(range)!=='string'){
-        throw new Error('WRONG TYPE OF RANGE')
-    }
-    let arr = range.split(/bytes=([0-9]*)-([0-9]*)/)
-    let start = parseInt(arr[1]);
-    let end = parseInt(arr[2]);
 
-    let result = {
+    result = {
         start: isNaN(start) ? 0 : start,
         end
     }
