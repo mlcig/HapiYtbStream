@@ -1,0 +1,23 @@
+{
+  "name": "hapiytbstream",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mlcig/HapiYtbStream.git"
+  },
+  "author": "ocy",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mlcig/HapiYtbStream/issues"
+  },
+  "homepage": "https://github.com/mlcig/HapiYtbStream#readme",
+  "dependencies": {
+    "@hapi/hapi": "^19.1.1",
+    "ytdl-core": "^2.1.2"
+  }
+}
