@@ -1,3 +1,26 @@
+const videoAudio = format => !!format.qualityLabel ? 'video' : 'audio'
+const setContentType = info => {
+    let format = info.formats[0]
+    return `${videoAudio(format)}/${format.container}`
+}
+
+const getStreamLength = stream => {
+    return new Promise((resolve, reject) => {
+        stream.on('progress', (a, b, c) => {
+            resolve(c);
+        })
+    })
+}
+
+const getTotalLength = async (format, start, stream) => {
+    if (format.contentLength) {
+        return format.contentLength
+    } else {
+        let streamLenth = await getStreamLength(stream)
+        return start + streamLenth
+    }
+}
+
 const rangeParse = (range, size) => {
     let result = {}, start, end
     if (range) {
@@ -22,28 +45,8 @@ const rangeParse = (range, size) => {
     return result
 }
 
-const videoAudio = format => !!format.qualityLabel ? 'video' : 'audio'
-const setContentType = info => {
-    let format = info.formats[0]
-    return `${videoAudio(format)}/${format.container}`
-}
-
-const getContentSize = (format, stream) => {
-    if (format.contentLength) {
-        return format.contentLength
-    } else {
-        return new Promise((resolve, reject) => {
-            stream.on('progress', (a, b, c) => {
-                resolve(c);
-            })
-        })
-    }
-}
-
 module.exports = {
     setContentType,
-    getContentSize,
+    getTotalLength,
     rangeParse
 }
-
-console.log(rangeParse())
